@@ -414,20 +414,35 @@ namespace MessageData
             chart.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
             chart.ChartAreas[0].AxisX.LabelStyle.Format = "dd MMM yyyy";
             Series series = new Series();
-            
+            //Series seriesT = new Series();
+
             series.ChartType = SeriesChartType.Line;
             series.BorderWidth = 3;
+
+            //seriesT.ChartType = SeriesChartType.Line;
+            //seriesT.BorderWidth = 3;
+
+
             chart.Series.Add(series);
+            //chart.Series.Add(seriesT);
+
             chart.Size = new Size(850, 480);
 
             int maxD = DailyMessages.Keys.Max();
 
+            //int totalMsg = 0;
+
             for (int i = 0; i <= maxD; i++)
             {
+                
+                
+
                 if (DailyMessages.ContainsKey(i))
                 {
                     chart.Series[0].Points.AddXY(rootDate.AddDays(i), DailyMessages[i]);
                     chart.Series[0].Points.Last().ToolTip = DailyMessages[i].ToString();
+
+                    //totalMsg += DailyMessages[i];
                 }
                 else
                 {
@@ -435,7 +450,7 @@ namespace MessageData
                     chart.Series[0].Points.Last().ToolTip = "0";
                 }
 
-
+                //chart.Series[1].Points.AddXY(rootDate.AddDays(i), totalMsg);
 
                 if (checkBox1.Checked)
                 {

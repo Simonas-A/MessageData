@@ -202,6 +202,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
+            this.linkLabel1.LinkColor = System.Drawing.Color.Aqua;
             this.linkLabel1.Location = new System.Drawing.Point(1288, 527);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(104, 13);
@@ -213,6 +214,7 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
+            this.linkLabel2.LinkColor = System.Drawing.Color.Aqua;
             this.linkLabel2.Location = new System.Drawing.Point(14, 484);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(93, 13);
