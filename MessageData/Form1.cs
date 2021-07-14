@@ -50,7 +50,7 @@ namespace MessageData
         Dictionary<DayOfWeek, int> WeekMessageRate = new Dictionary<DayOfWeek, int>();
 
         //string fullPath = "C:/Users/Simuxxl/Desktop/CombinedChatLog.txt";
-        string fullPath = "G:\\Media\\Chatlog1\\messages\\inbox\\DesreliuBalius_r6yKxngZaQ\\message_1.html";
+        string fullPath = "G:\\Media\\Chatlog1\\messages\\inbox\\Aktyvus_yt5i4soerg\\message_1.html";
         bool defaultPath = true;
 
         bool multipleFiles = false;
@@ -59,6 +59,9 @@ namespace MessageData
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //openFileDialog1.FileNames = new string[] { "oba", "asd" };
+
+
             //MessageBox.Show(HtmlAgilityPack.htmlD"&quot;"); ;
 
 
@@ -414,23 +417,27 @@ namespace MessageData
             chart.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
             chart.ChartAreas[0].AxisX.LabelStyle.Format = "dd MMM yyyy";
             Series series = new Series();
-            //Series seriesT = new Series();
+
+            Series seriesT = new Series();
 
             series.ChartType = SeriesChartType.Line;
             series.BorderWidth = 3;
 
-            //seriesT.ChartType = SeriesChartType.Line;
-            //seriesT.BorderWidth = 3;
+            seriesT.ChartType = SeriesChartType.Line;
+            seriesT.BorderWidth = 3;
 
 
             chart.Series.Add(series);
-            //chart.Series.Add(seriesT);
+            chart.Series.Add(seriesT);
 
             chart.Size = new Size(850, 480);
 
             int maxD = DailyMessages.Keys.Max();
 
-            //int totalMsg = 0;
+            int totalMsg = 0;
+
+            int mostDailyMessages = DailyMessages.OrderByDescending(k => k.Value).First().Value;
+            int totalMsgAll = DailyMessages.Sum(k => k.Value);
 
             for (int i = 0; i <= maxD; i++)
             {
@@ -442,7 +449,7 @@ namespace MessageData
                     chart.Series[0].Points.AddXY(rootDate.AddDays(i), DailyMessages[i]);
                     chart.Series[0].Points.Last().ToolTip = DailyMessages[i].ToString();
 
-                    //totalMsg += DailyMessages[i];
+                    totalMsg += DailyMessages[i];
                 }
                 else
                 {
@@ -450,7 +457,7 @@ namespace MessageData
                     chart.Series[0].Points.Last().ToolTip = "0";
                 }
 
-                //chart.Series[1].Points.AddXY(rootDate.AddDays(i), totalMsg);
+                chart.Series[1].Points.AddXY(rootDate.AddDays(i), totalMsg * mostDailyMessages / totalMsgAll);///
 
                 if (checkBox1.Checked)
                 {
@@ -803,7 +810,7 @@ namespace MessageData
                                                                 node8.InnerText.Contains("updated the plan")
                                                                 )
                                                             {
-                                                                deletedMessages.Add(node8.InnerText);
+                                                                //deletedMessages.Add(node8.InnerText);
                                                                 legitMsg = false;
                                                                 break;
                                                             }
