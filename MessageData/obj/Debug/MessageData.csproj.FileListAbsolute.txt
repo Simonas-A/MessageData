@@ -1,7 +1,6 @@
 C:\Users\Simuxxl\source\repos\MessageData\MessageData\bin\Debug\MessageData.exe.config
 C:\Users\Simuxxl\source\repos\MessageData\MessageData\bin\Debug\MessageData.exe
 C:\Users\Simuxxl\source\repos\MessageData\MessageData\bin\Debug\MessageData.pdb
-C:\Users\Simuxxl\source\repos\MessageData\MessageData\obj\Debug\MessageData.csprojAssemblyReference.cache
 C:\Users\Simuxxl\source\repos\MessageData\MessageData\obj\Debug\MessageData.Form1.resources
 C:\Users\Simuxxl\source\repos\MessageData\MessageData\obj\Debug\MessageData.Properties.Resources.resources
 C:\Users\Simuxxl\source\repos\MessageData\MessageData\obj\Debug\MessageData.csproj.GenerateResource.cache
@@ -15,3 +14,5 @@ C:\Users\Simuxxl\source\repos\MessageData\MessageData\bin\Debug\HtmlAgilityPack.
 C:\Users\Simuxxl\source\repos\MessageData\MessageData\obj\Debug\MessageData.csproj.CopyComplete
 C:\Users\Simuxxl\source\repos\MessageData\MessageData\obj\Debug\MessageData.Form2.resources
 C:\Users\Simuxxl\source\repos\MessageData\MessageData\obj\Debug\MessageData.WordListForm.resources
+C:\Users\Simuxxl\source\repos\MessageData\MessageData\obj\Debug\MessageData.csproj.AssemblyReference.cache
+C:\Users\Simuxxl\source\repos\MessageData\MessageData\obj\Debug\MessageData.csproj.SuggestedBindingRedirects.cache
