@@ -11,7 +11,7 @@ namespace MessageData
 {
     internal static class DataViewManipulator
     {
-        public static ListView MessageDetailsListView(Dictionary<string, Tuple<int, int>> users, Action<object, ListViewItemSelectionChangedEventArgs> listView_ItemSelectionChanged, Action<object, ColumnClickEventArgs> listView_ColumnClick, bool darkMode, Color[] colorScheme)
+        public static ListView UserMessagesListView(Dictionary<string, Tuple<int, int>> users, Action<object, ListViewItemSelectionChangedEventArgs> listView_ItemSelectionChanged, Action<object, ColumnClickEventArgs> listView_ColumnClick, bool darkMode, Color[] colorScheme)
         {
 
             ListView listView = new ListView();

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using static MessageData.DataViewManipulator;
 
 namespace MessageData
 {
@@ -24,6 +25,8 @@ namespace MessageData
         public bool colorsEnabled = true;
 
         public List<Message> UserMessages = new List<Message>();
+
+        Dictionary<string, int> ReactCount = new Dictionary<string, int>();
 
         Dictionary<int, int> DayMessageRate = new Dictionary<int, int>();
         Dictionary<DayOfWeek, int> WeekMessageRate = new Dictionary<DayOfWeek, int>();
@@ -96,16 +99,24 @@ namespace MessageData
         {
             
 
-            listView1.Columns.Add("", 200);
-            listView1.Columns.Add("", 100);
+            //listView1.Columns.Add("", 200);
+            //listView1.Columns.Add("", 100);
 
             tabControl1.TabPages.Clear();
+            tabControl2.TabPages.Clear();
+
             tabControl1.TabPages.Add("User general activity");
             tabControl1.TabPages.Add("User weekly activity");
             tabControl1.TabPages.Add("User daily activity");
 
+            tabControl1.TabPages.Add("Activity by month");
+            tabControl1.TabPages.Add("Activity by year");
+
+            tabControl2.TabPages.Add("Statistics");
+            tabControl2.TabPages.Add("Reacts");
+
             ManipData();
-            FillChart();
+            FillChart2();
 
             if (darkMode)
             {
@@ -114,15 +125,21 @@ namespace MessageData
                 checkBox2.ForeColor = ColorScheme[1];
                 checkBox3.ForeColor = ColorScheme[1];
 
-                tabControl1.TabPages[0].BackColor = ColorScheme[0];
-                tabControl1.TabPages[0].ForeColor = ColorScheme[1];
-                tabControl1.TabPages[1].BackColor = ColorScheme[0];
-                tabControl1.TabPages[1].ForeColor = ColorScheme[1];
-                tabControl1.TabPages[2].BackColor = ColorScheme[0];
-                tabControl1.TabPages[2].ForeColor = ColorScheme[1];
+                foreach (TabPage page in tabControl1.TabPages)
+                {
+                    page.BackColor = ColorScheme[0];
+                    page.ForeColor = ColorScheme[1];
+                }
 
-                listView1.ForeColor = ColorScheme[1];
-                listView1.BackColor = ColorScheme[0];
+                foreach (TabPage page in tabControl2.TabPages)
+                {
+                    page.BackColor = ColorScheme[0];
+                    page.ForeColor = ColorScheme[1];
+                }
+
+
+                //listView1.ForeColor = ColorScheme[1];
+                //listView1.BackColor = ColorScheme[0];
 
             }
 
@@ -174,6 +191,19 @@ namespace MessageData
                     DailyMessages[d]++;
                 else
                     DailyMessages.Add(d, 1);
+
+                foreach (var react in msg.Reacts)
+                {
+
+                    if (ReactCount.ContainsKey(react.ReactType))
+                    {
+                        ReactCount[react.ReactType]++;
+                    }
+                    else
+                    {
+                        ReactCount.Add(react.ReactType, 1);
+                    }
+                }
             }
             totalMessages = UserMessages.Count();
 
@@ -264,8 +294,29 @@ namespace MessageData
             //Close(); //^geras debugas^
         }
 
+        private void FillChart2()
+        {
+            int[] stats = { totalMessages, totalReacts, maxDayMessages, mostReacts, streakI, streakN };
+
+
+            tabControl2.TabPages[0].Controls.Add(ChatDetailsListView(stats, darkMode, ColorScheme));
+            tabControl2.TabPages[1].Controls.Add(ReactsListView(ReactCount, darkMode, ColorScheme));
+            //listView1 = ChatDetailsListView(stats, darkMode, ColorScheme);
+
+            tabControl1.TabPages[0].Controls.Add(DailyMessageChart(DailyMessages, rootDate, checkBox1.Checked, darkMode, ColorScheme));
+            tabControl1.TabPages[1].Controls.Add(MessagesByWeekDayChart(WeekMessageRate, darkMode, ColorScheme));
+            tabControl1.TabPages[2].Controls.Add(MessagesByHourChart(DayMessageRate, darkMode, ColorScheme));
+
+            List<DateTime> MessageDates = UserMessages.Select(m => m.Date).ToList();
+
+            //tabControl2.TabPages[4].Controls.Add(WeeklyMessageChart(MessageDates, darkMode, ColorScheme));
+            tabControl1.TabPages[3].Controls.Add(MonthlyMessageChart(MessageDates, checkBox1.Checked, darkMode, ColorScheme));
+            tabControl1.TabPages[4].Controls.Add(YearlyMessageChart(MessageDates, darkMode, ColorScheme));
+        }
+
         private void FillChart()
         {
+            throw new Exception("obsolete method");
             Chart chart = new Chart();
             chart.ChartAreas.Add("chartArea");
             //chart.ChartAreas[0].AxisX.Minimum = rootDate;
@@ -372,6 +423,8 @@ namespace MessageData
 
 
             //ListViewItem item = new ListViewItem("Total messages");
+            
+            /*
             listView1.Items.Add("Total messages");
             listView1.Items.Add("Most messages per day");
             listView1.Items.Add("Most reacts on message");
@@ -385,7 +438,7 @@ namespace MessageData
             listView1.Items[3].SubItems.Add(totalReacts.ToString());
             listView1.Items[4].SubItems.Add(streakI.ToString());
             listView1.Items[5].SubItems.Add(streakN.ToString());
-
+            */
 
             if (darkMode)
             {
@@ -430,7 +483,7 @@ namespace MessageData
 
                 chart.Series[0].LabelForeColor = ColorScheme[1];
             }
-
+            
 
             /* Total messages
              * Active streak\

@@ -273,7 +273,7 @@ namespace MessageData
             int[] stats = { totalMessages, totalReacts, maxDayMessages, mostReacts, streakI, streakN };
 
 
-            tabControl1.TabPages[0].Controls.Add(MessageDetailsListView(Users, ListView_ItemSelectionChanged, ListView_ColumnClick, darkMode, ColorScheme));
+            tabControl1.TabPages[0].Controls.Add(UserMessagesListView(Users, ListView_ItemSelectionChanged, ListView_ColumnClick, darkMode, ColorScheme));
             tabControl1.TabPages[1].Controls.Add(UserReactsListView(UserReacts, darkMode, ColorScheme));
             tabControl1.TabPages[2].Controls.Add(ChatDetailsListView(stats, darkMode, ColorScheme));
             tabControl1.TabPages[3].Controls.Add(ReactsListView(ReactCount, darkMode, ColorScheme));
